@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>myToDo List</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .task-item { margin-bottom: 15px; display: flex; gap: 10px; align-items: center; }
+        hr { margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+    <h2>My ToDo List</h2>
+    <form action="/add" method="post">
+        <input type="text" name="task" placeholder="Enter your Task" required>
+        <button type="submit">➕ Add Task</button>
+    </form>
+
+    <hr>
+
+    <h2>My Tasks</h2>
+    {% for task in tasks %}
+    <div class="task-item">
+        <input type="text" value="{{ task.title }}" readonly>
+        
+        <a href="/update/{{ task.id }}">
+            <button type="button">🔗 Update Task</button>
+        </a>
+        
+        <a href="/delete/{{ task.id }}" style="color: red; text-decoration: none;">🗑️ delete</a>
+    </div>
+    {% else %}
+    <p>No tasks found! Add one above.</p>
+    {% endfor %}
+
+</body>
+</html>
